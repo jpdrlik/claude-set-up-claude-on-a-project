@@ -14,9 +14,9 @@ I deliberately left out a file-by-file description of the code, the course instr
 
 Without the deny rules, Claude could read `.env` while "looking around" the project and copy a real secret into its context, a log or a commit; a force-push could overwrite history on the shared branch and lose other people's work; and `rm -rf` could delete files that are not in git. Deny rules win over allow rules, so these stay blocked even if I approve something broader later.
 
-## Fix found along the way
+## Something I noticed but left out of this PR
 
-The lines in `.gitignore` had leading spaces, and Git treats leading spaces as part of the pattern, so `.env` and `.claude/settings.local.json` were **not** actually being ignored (`git check-ignore .env` returned nothing). I removed the indentation; now both files are ignored as the README intends.
+The lines in `.gitignore` have leading spaces, and Git treats leading spaces as part of the pattern, so `.env` and `.claude/settings.local.json` are **not** actually ignored (`git check-ignore .env` returns nothing). I kept this PR to the three requested files, so I'm flagging it here instead: removing the indentation fixes it. Until then, I check `git status` before committing so neither file slips in.
 
 ## Verification
 
